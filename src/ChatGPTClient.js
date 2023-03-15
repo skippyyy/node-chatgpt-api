@@ -159,7 +159,6 @@ export default class ChatGPTClient {
         const opts = {
             method: 'POST',
             headers: {
-                'Access-Control-Allow-Origin': 'https://chat.suschegg.com',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(modelOptions),
@@ -184,7 +183,6 @@ export default class ChatGPTClient {
                     await fetchEventSource(url, {
                         ...opts,
                         signal: abortController.signal,
-                        mode: 'cors',
                         async onopen(response) {
                             if (response.status === 200) {
                                 return;

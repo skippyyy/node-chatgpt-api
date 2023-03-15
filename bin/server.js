@@ -46,7 +46,7 @@ const server = fastify();
 
 await server.register(FastifySSEPlugin);
 await server.register(cors, {
-    origin: '*',
+    origin: 'https://chat.suschegg.com',
 });
 
 server.post('/conversation', async (request, reply) => {

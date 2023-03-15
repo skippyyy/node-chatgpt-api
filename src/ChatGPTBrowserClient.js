@@ -90,7 +90,6 @@ export default class ChatGPTBrowserClient {
                 await fetchEventSource(url, {
                     ...opts,
                     signal: abortController.signal,
-                    mode: 'cors',
                     async onopen(openResponse) {
                         if (openResponse.status === 200) {
                             return;
@@ -260,7 +259,6 @@ export default class ChatGPTBrowserClient {
         const opts = {
             method: 'POST',
             headers: {
-                'Access-Control-Allow-Origin': 'https://chat.suschegg.com',
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${this.accessToken}`,
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36',

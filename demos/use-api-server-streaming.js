@@ -4,7 +4,6 @@ import { fetchEventSource } from '@waylaidwanderer/fetch-event-source';
 const opts = {
     method: 'POST',
     headers: {
-        'Access-Control-Allow-Origin': 'https://chat.suschegg.com',
         'Content-Type': 'application/json',
     },
     body: JSON.stringify({
@@ -20,7 +19,6 @@ try {
     await fetchEventSource('http://localhost:3001/conversation', {
         ...opts,
         signal: controller.signal,
-        mode: 'cors',
         onopen(response) {
             if (response.status === 200) {
                 return;
