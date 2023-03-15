@@ -19,6 +19,7 @@ try {
     await fetchEventSource('http://localhost:3001/conversation', {
         ...opts,
         signal: controller.signal,
+        mode: 'cors',
         onopen(response) {
             if (response.status === 200) {
                 return;

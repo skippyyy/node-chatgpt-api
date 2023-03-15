@@ -90,6 +90,7 @@ export default class ChatGPTBrowserClient {
                 await fetchEventSource(url, {
                     ...opts,
                     signal: abortController.signal,
+                    mode: 'cors',
                     async onopen(openResponse) {
                         if (openResponse.status === 200) {
                             return;
