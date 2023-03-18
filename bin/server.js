@@ -50,6 +50,8 @@ await server.register(cors, {
     credentials: true,
 });
 
+server.get('/ping', () => Date.now().toString());
+
 server.post('/conversation', async (request, reply) => {
     const body = request.body || {};
     const abortController = new AbortController();
@@ -125,13 +127,13 @@ server.post('/conversation', async (request, reply) => {
         return reply.send(result);
     }
 
-    const code = error?.data?.code || 503;
+    const code = error?.data?.code || (error.name === 'UnauthorizedRequest' ? 401 : 503);
     if (code === 503) {
         console.error(error);
     } else if (settings.apiOptions?.debug) {
         console.debug(error);
     }
-    const message = error?.data?.message || `There was an error communicating with ${clientToUse === 'bing' ? 'Bing' : 'ChatGPT'}.`;
+    const message = error?.data?.message || error?.message || `There was an error communicating with ${clientToUse === 'bing' ? 'Bing' : 'ChatGPT'}.`;
     if (body.stream === true) {
         reply.sse({
             id: '',
